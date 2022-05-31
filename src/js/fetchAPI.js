@@ -10,12 +10,16 @@ export default class Gallery{
     async fetchGallery() {
         const URL = "https://pixabay.com/api/";
         const KEY = "26705827-e07885d0f867327c6c3f35c60";
+        try {
         const response = await axios.get(`${URL}?key=${KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.page}`);
         const photos = await response.data;
         this.incrementPage();
         this.amountEl += photos.hits.length;
         return photos;
-       
+        } 
+        catch (error){
+        axios.failure(error.message);
+        }
     }
 
     get query() {
