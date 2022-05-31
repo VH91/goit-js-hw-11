@@ -29,9 +29,14 @@ function openLightBox() {
 async function searchGallery(e) { 
     e.preventDefault();   
 
-    cardGallery.query = e.target.elements.searchQuery.value;
+    cardGallery.query = e.target.elements.searchQuery.value.trim();
     cardGallery.resetPage();
     cardGallery.resentAmount();
+    if (!cardGallery) {
+        Notify.failure('Please, enter some words');
+    return;
+    }
+    
 
     try {
         clearGallery(); 
